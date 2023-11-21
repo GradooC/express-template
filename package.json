@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "db:gui": "prisma studio",
-    "start": "ts-node src/index.ts"
+    "start": "docker-compose up -d && ts-node src/index.ts",
+    "stop": "docker-compose down && pkill -SIGINT node"
   },
   "keywords": [],
   "author": "",
