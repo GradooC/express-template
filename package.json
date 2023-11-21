@@ -6,6 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "db:gui": "prisma studio",
+    "dev": "docker-compose up -d && nodemon src/index.ts",
     "start": "docker-compose up -d && ts-node src/index.ts",
     "stop": "docker-compose down && pkill -SIGINT node"
   },
@@ -26,6 +27,7 @@
     "eslint": "^8.54.0",
     "eslint-config-prettier": "^9.0.0",
     "eslint-plugin-prettier": "^5.0.1",
+    "nodemon": "^3.0.1",
     "prettier": "^3.1.0",
     "prisma": "^5.6.0",
     "ts-node": "^10.9.1",
