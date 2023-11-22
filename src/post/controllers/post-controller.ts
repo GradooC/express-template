@@ -7,7 +7,8 @@ export async function getAllPublishedPosts(req: Request, res: Response) {
         where: { published: true },
         include: { author: true },
     });
-    res.json(posts);
+
+    return res.json(posts);
 }
 
 export async function getPost(req: Request, res: Response) {
@@ -15,7 +16,8 @@ export async function getPost(req: Request, res: Response) {
     const post = await prisma.post.findUnique({
         where: { id: Number(id) },
     });
-    res.json(post);
+
+    return res.json(post);
 }
 
 export async function addPost(req: Request, res: Response) {
@@ -24,11 +26,11 @@ export async function addPost(req: Request, res: Response) {
         data: {
             title,
             content,
-            published: false,
             author: { connect: { email: authorEmail } },
         },
     });
-    res.json(result);
+
+    return res.json(result);
 }
 
 export async function publishPost(req: Request, res: Response) {
@@ -37,7 +39,8 @@ export async function publishPost(req: Request, res: Response) {
         where: { id: Number(id) },
         data: { published: true },
     });
-    res.json(post);
+
+    return res.json(post);
 }
 
 export async function deletePost(req: Request, res: Response) {
@@ -45,5 +48,6 @@ export async function deletePost(req: Request, res: Response) {
     const post = await prisma.post.delete({
         where: { id: Number(id) },
     });
-    res.json(post);
+
+    return res.json(post);
 }
