@@ -8,8 +8,8 @@ import { signUpBodySchema } from './schemas/sign-up-body';
 
 const router = Router();
 
-router.post(`/sign-up`, validate({ body: signUpBodySchema }), signUp);
+router.post(`/sign-up`, validate(signUpBodySchema), signUp);
 
-router.post('/sign-in', validate({ body: signInBodySchema }), signIn);
+router.post('/sign-in', validate(signInBodySchema), signIn);
 
 export const userRouter = router;

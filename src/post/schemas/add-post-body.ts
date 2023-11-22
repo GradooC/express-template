@@ -1,25 +1,9 @@
-import { Post, User } from '@prisma/client';
-import { JSONSchemaType } from 'ajv';
+import { object, string } from 'zod';
 
-type AddPostBody = {
-    title: Post['title'];
-    content: Post['content'];
-    authorEmail: User['email'];
-};
-
-export const addPostBodySchema: JSONSchemaType<AddPostBody> = {
-    type: 'object',
-    properties: {
-        title: {
-            type: 'string',
-        },
-        content: {
-            type: 'string',
-        },
-        authorEmail: {
-            type: 'string',
-        },
-    },
-    required: ['title', 'authorEmail'],
-    additionalProperties: false,
-};
+export const addPostBodySchema = object({
+    body: object({
+        title: string(),
+        authorEmail: string().email(),
+        content: string().optional(),
+    }),
+});

@@ -16,12 +16,12 @@ const router = Router();
 
 router.get('/feed', getAllPublishedPosts);
 
-router.get('/:id', validate({ params: idParamSchema }), getPost);
+router.get('/:id', validate(idParamSchema), getPost);
 
-router.post('/', validate({ body: addPostBodySchema }), addPost);
+router.post('/', validate(addPostBodySchema), addPost);
 
-router.put('/publish/:id', validate({ params: idParamSchema }), publishPost);
+router.put('/publish/:id', validate(idParamSchema), publishPost);
 
-router.delete('/:id', validate({ params: idParamSchema }), deletePost);
+router.delete('/:id', validate(idParamSchema), deletePost);
 
 export const postRouter = router;

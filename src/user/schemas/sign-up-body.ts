@@ -1,19 +1,9 @@
-import { User } from '@prisma/client';
-import { JSONSchemaType } from 'ajv';
+import { object, string } from 'zod';
 
-type SignUpBody = {
-    email: User['email'];
-    password: User['password'];
-    name: User['name'];
-};
-
-export const signUpBodySchema: JSONSchemaType<SignUpBody> = {
-    type: 'object',
-    properties: {
-        email: { type: 'string' },
-        password: { type: 'string', minLength: 6 },
-        name: { type: 'string' },
-    },
-    required: ['email', 'password'],
-    additionalProperties: false,
-};
+export const signUpBodySchema = object({
+    body: object({
+        email: string().email(),
+        password: string().min(6),
+        name: string().optional(),
+    }),
+});

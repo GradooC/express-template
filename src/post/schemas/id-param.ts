@@ -1,17 +1,7 @@
-import { JSONSchemaType } from 'ajv';
+import { coerce, object } from 'zod';
 
-type IdParam = {
-    id: string;
-};
-
-export const idParamSchema: JSONSchemaType<IdParam> = {
-    type: 'object',
-    properties: {
-        id: {
-            type: 'string',
-            pattern: '\\d+',
-        },
-    },
-    required: ['id'],
-    additionalProperties: false,
-};
+export const idParamSchema = object({
+    params: object({
+        id: coerce.number().min(0),
+    }),
+});
