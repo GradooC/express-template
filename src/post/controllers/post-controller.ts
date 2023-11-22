@@ -1,4 +1,5 @@
 import { Request, Response } from 'express';
+
 import { prisma } from '../../db';
 
 export async function getAllPublishedPosts(req: Request, res: Response) {

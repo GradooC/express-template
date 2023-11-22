@@ -1,12 +1,13 @@
+import { compare, hash } from 'bcrypt';
 import { Request, Response } from 'express';
+import { sign } from 'jsonwebtoken';
+
 import { prisma } from '../../db';
-import bcrypt from 'bcrypt';
-import jwt from 'jsonwebtoken';
 
 export async function signUp(req: Request, res: Response) {
     try {
         const { email, password, name } = req.body;
-        const passwordHash = await bcrypt.hash(password, 10);
+        const passwordHash = await hash(password, 10);
 
         const user = await prisma.user.create({
             data: { email, name, password: passwordHash },
@@ -34,7 +35,7 @@ export async function signIn(req: Request, res: Response) {
                 .json({ message: 'Invalid username or password' });
         }
 
-        const isPasswordValid = await bcrypt.compare(password, user.password);
+        const isPasswordValid = await compare(password, user.password);
 
         if (!isPasswordValid) {
             return res
@@ -44,7 +45,7 @@ export async function signIn(req: Request, res: Response) {
 
         const userInfo = { email: user.email, id: user.id };
 
-        const token = jwt.sign(
+        const token = sign(
             { user: userInfo },
             process.env.JWT_SECRET || 'DEFAULT_JWT_SECRET',
             {

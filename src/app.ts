@@ -1,16 +1,17 @@
-import express from 'express';
-import { userRouter } from './user';
-import { postRouter } from './post';
-import { loggerMiddleware } from './common/middlewares/logger-middleware';
+import express, { json } from 'express';
 import passport from 'passport';
+
 import {
     authMiddleware,
     jwtStrategy,
 } from './common/middlewares/auth-middleware';
+import { loggerMiddleware } from './common/middlewares/logger-middleware';
+import { postRouter } from './post';
+import { userRouter } from './user';
 
 const app = express();
 
-app.use(express.json());
+app.use(json());
 app.use(loggerMiddleware);
 passport.use(jwtStrategy);
 
