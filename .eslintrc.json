@@ -6,6 +6,8 @@
     "extends": [
         "eslint:recommended",
         "plugin:@typescript-eslint/recommended",
+        "plugin:import/recommended",
+        "plugin:import/typescript",
         "plugin:prettier/recommended"
     ],
     "parser": "@typescript-eslint/parser",
@@ -15,6 +17,28 @@
     },
     "plugins": ["prettier", "@typescript-eslint"],
     "rules": {
-        "prettier/prettier": "error"
+        "prettier/prettier": "error",
+        "import/order": [
+            "error",
+            {
+                "groups": [
+                    "builtin",
+                    "external",
+                    "internal",
+                    "parent",
+                    "sibling",
+                    "index",
+                    "type"
+                ],
+                "newlines-between": "always",
+                "alphabetize": { "order": "asc", "caseInsensitive": true }
+            }
+        ]
+    },
+    "settings": {
+        "import/resolver": {
+            "typescript": true,
+            "node": true
+        }
     }
 }
