@@ -7,7 +7,7 @@ import {
 } from 'passport-jwt';
 
 const options: StrategyOptions = {
-    secretOrKey: process.env.JWT_SECRET,
+    secretOrKey: process.env.JWT_SECRET || 'DEFAULT_JWT_SECRET',
     jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
 };
 
