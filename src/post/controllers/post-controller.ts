@@ -5,7 +5,14 @@ import { prisma } from '../../db';
 export async function getAllPublishedPosts(req: Request, res: Response) {
     const posts = await prisma.post.findMany({
         where: { published: true },
-        include: { author: true },
+        include: {
+            author: {
+                select: {
+                    email: true,
+                    name: true,
+                },
+            },
+        },
     });
 
     return res.json(posts);
